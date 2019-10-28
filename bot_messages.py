@@ -15,6 +15,7 @@ import bot_users_check
 
 #Ex
 import schedule
+import dialog_flow
 
 vk_session = vk_api.VkApi(token='02d23799d5fcd74ab5c28e8ca9b1d268dc43308b34d0918332da3316c60a5762bb467d4c9641a0fc0cdcd')
 longpoll = VkLongPoll(vk_session)
@@ -38,14 +39,9 @@ def message_send_func(event, vk):
                         )
         bot_report.message_reply_func(event.user_id, schedule.lessons_func(event.text.lower()))
     elif bot_commands.excel_messages_func(event.text.lower()) == False:
-        vk.messages.send( #none
-            user_id=event.user_id,
-            message='Не понял команду',
-            random_id = 0
-                        )
-        bot_report.message_reply_func(event.user_id, 'Не понял команду')
+        dialog_flow.textMessage(event.user_id, event.text)
     else:
-        print('Ошибка в отправки или получении сообщения.')
+        bot_report.message_error_func(event.user_id, event.text)
 
 def defined_message_func(user_id, message):
     vk.messages.send(

@@ -16,7 +16,7 @@ def user_group_func():
     for com_keys in ws['A']:
         for com_keys1 in ws['B']:
             users_dict[com_keys.value] = com_keys1.value
-    print (users_dict)
+
 
 def users_list_get_func():
     users_list = list()
