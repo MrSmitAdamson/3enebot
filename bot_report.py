@@ -3,8 +3,10 @@ import requests
 import vk_api
 import time
 import traceback
+import os
 
 import bot_logging
+import bot_pid
 
 vk_session = vk_api.VkApi(token='02d23799d5fcd74ab5c28e8ca9b1d268dc43308b34d0918332da3316c60a5762bb467d4c9641a0fc0cdcd')
 vk = vk_session.get_api()
@@ -12,15 +14,18 @@ vk = vk_session.get_api()
 admin_list = {
     'admin_AIDAR'   :   '197427433',
     'admin_SADZIP'  :   '491258611',
-    'admin_LINAR'   :   '108127462'
+    'admin_LINAR'   :   '108127462',
 }
 
 def bot_started_message_func():
-    bot_logging.logger(f'{time.strftime("%X", time.localtime())}: Бот запущен.\n')
+    bot_logging.logger(f'{time.strftime("%X", time.localtime())}: Бот запущен.')
+    pid = os.getpid()
+    bot_logging.logger(f'Pid бота: {pid}\n')
+    bot_pid.bot_pid_file_write_func(f'{pid}')
     for key, value in admin_list.items():
         vk.messages.send( #Бот запущен
                     user_id = str(value),
-                    message = f'{time.strftime("%X", time.localtime())}: Бот запущен.',
+                    message = f'{time.strftime("%X", time.localtime())}: Бот запущен.\nPid бота: {pid}',
                     random_id = '0'
                         )
 
@@ -78,3 +83,4 @@ def bot_error_func():
                     message = f'{time.strftime("%X", time.localtime())}: Ошибка.\n{traceback.format_exc()}',
                     random_id = '0'
                         )
+

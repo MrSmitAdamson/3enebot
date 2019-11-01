@@ -8,7 +8,6 @@ import bot_messages
 import bot_report
 import bot_users_check
 
-
 vk_session = vk_api.VkApi(token='02d23799d5fcd74ab5c28e8ca9b1d268dc43308b34d0918332da3316c60a5762bb467d4c9641a0fc0cdcd')
 
 from vk_api.longpoll import VkLongPoll, VkEventType
@@ -34,7 +33,3 @@ except:
     bot_report.bot_error_func()
     bot_report.bot_restart_message_func()
     os.execl(sys.executable, sys.executable, * sys.argv)
-
-        
-
-            

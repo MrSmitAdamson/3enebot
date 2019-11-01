@@ -4,7 +4,7 @@ import bs4
 
 import datetime
 import locale
-locale.setlocale(locale.LC_ALL, 'ru')
+locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 
 def get_weekday_func():
     today = datetime.datetime.today().strftime("%A")
